@@ -59,6 +59,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/configuration/${PROJECT_NAME}.pc.in)
 
 ##### INSTALL Configuration ####################################################
+set (CMAKE_INSTALL_PREFIX "/home/aduda/MyProject/build/")
 
 # include/
 # TODO: recursive copy with directories

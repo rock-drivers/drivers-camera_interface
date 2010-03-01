@@ -1,0 +1,10 @@
+prefix=/home/aduda/MyProject/build
+exec_prefix=/home/aduda/MyProject/build
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: camera_interface
+Description: Dummy project just to show how the infrastructure is working
+Version: 1.0
+Libs: -L${libdir} -lcamera_interface
+Cflags: -I${includedir}

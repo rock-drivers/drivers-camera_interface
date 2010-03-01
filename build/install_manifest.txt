@@ -1,0 +1,7 @@
+/home/aduda/MyProject/build/include/camera_interface/CamInfoUtils.h
+/home/aduda/MyProject/build/include/camera_interface/CameraFrame.h
+/home/aduda/MyProject/build/include/camera_interface/CamTypes.h
+/home/aduda/MyProject/build/include/camera_interface/time2.h
+/home/aduda/MyProject/build/include/camera_interface/CamInterface.h
+/home/aduda/MyProject/build/lib/pkgconfig/camera_interface.pc
+/home/aduda/MyProject/build/lib/libcamera_interface.so

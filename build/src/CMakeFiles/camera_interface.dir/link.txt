@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -g  -shared -Wl,-soname,libcamera_interface.so -o ../lib/libcamera_interface.so CMakeFiles/camera_interface.dir/CamInterface.cpp.o 
