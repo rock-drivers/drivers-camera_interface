@@ -168,7 +168,9 @@ namespace camera
             AcqStartTriggerModeToSyncIn2,
             AcqStartTriggerModeToSyncIn3,
             AcqStartTriggerModeToSyncIn4,
-            AcqStartTriggerModeToDisabled
+            AcqStartTriggerModeToDisabled,
+	    GammaToOn,
+	    GammaToOff
         };
     }
 
