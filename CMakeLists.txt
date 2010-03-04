@@ -46,7 +46,14 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 # If you create subdirectories within source include headers with subdirectory, i.e. 
 # #include "subdirectory/myheader.h"
 include_directories(${PROJECT_SOURCE_DIR}/src)
+
+include(FindPkgConfig)
+pkg_check_modules(BASE "base-types" )
+include_directories(${BASE_INCLUDE_DIRS})
+link_directories(${BASE_LIBDIR})
+
 ##### End specification of build directory ##############################
+
 
 
 # Process CMakeLists.txt in the following subdirectory
