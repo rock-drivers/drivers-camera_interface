@@ -15,17 +15,16 @@
 namespace camera {
     struct frame_attrib_t
     {
-#ifndef __orogen
-        inline void setData(const void* data , const int size)
-        {
-            data_.resize(size);
-            memcpy(&data_[0], data, size);
-        };
-        inline const void* getDataPtr()const
-                    { return static_cast<const void*>(&data_[0]);};
-#endif
-        std::vector<uint8_t> data_;
+        std::string data_;
         std::string name_;
+	
+#ifndef __orogen
+        inline void set(const std::string &name,const std::string &data)
+	{
+	  name_ = name;
+	  data_ = data;
+	}
+#endif
     };
 
     struct frame_size_t {
@@ -179,16 +178,17 @@ namespace camera {
                 return false;
             }
 	    
-	    template<typename T>
-	    inline T const& getAttribute(const std::string &name)const
+	    inline std::string const &getAttribute(const std::string &name)const
             {
-                std::vector<frame_attrib_t>::iterator _iter = attributes.begin();
+                static std::string default_value; 
+	      
+	        std::vector<frame_attrib_t>::const_iterator _iter = attributes.begin();
 		for(;_iter != attributes.end();_iter++)
 		{
 		  if(_iter->name_ == name)
-		    return *_iter;
+		    return _iter->data_;
 		}
-                return NULL;
+                return default_value;
             }
 
             inline bool deleteAttribute(const std::string &name)
@@ -205,8 +205,7 @@ namespace camera {
                 return false;  
             }
 	    
-	    template<typename T>
-            inline void setAttribute(const std::string &name, T const &data)
+            inline void setAttribute(const std::string &name, const std::string &data)
             {
 	      //if attribute exists
 	      std::vector<frame_attrib_t>::iterator _iter = attributes.begin();
@@ -214,16 +213,14 @@ namespace camera {
 	      {  
 		if(_iter->name_ == name)
 		{
-		  _iter->setData(data,sizeof(T));
-		  _iter->name_ = name;
+		  _iter->set(name,data);
 		  return;
 		}
 	      }
 	      
 	      //if attribute does not exist
 	      attributes.push_back(frame_attrib_t());
-	      attributes.back().setData(data,size);
-	      attributes.back().name_ = name;
+	      attributes.back().set(name,data);
               return ;  
             }
 
