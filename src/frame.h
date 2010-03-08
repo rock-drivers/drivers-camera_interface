@@ -43,7 +43,10 @@ namespace camera {
         MODE_RGB       = 2,
         RAW_MODES = 128,
         MODE_BAYER_RGGB = RAW_MODES + 0,
-	MODE_BAYER_GRBG = RAW_MODES + 0
+	MODE_BAYER_GRBG = RAW_MODES + 1,
+	MODE_BAYER_BGGR = RAW_MODES + 2,
+	MODE_BAYER_GBRG = RAW_MODES + 3
+
     };
     
 #ifndef __orogen
@@ -111,6 +114,9 @@ namespace camera {
                 switch(mode)
                 {
                     case MODE_BAYER_RGGB:return 1;
+                    case MODE_BAYER_BGGR:return 1;
+                    case MODE_BAYER_GBRG:return 1;
+                    case MODE_BAYER_GRBG:return 1;
                     case MODE_GRAYSCALE: return 1;
                     case MODE_RGB:       return 3;
                     default:             return 0;
