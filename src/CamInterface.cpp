@@ -120,8 +120,8 @@ namespace camera
 	mode = dst.frame_mode;
 	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth())
 	   throw std::runtime_error("Size does not match!");
-	
-	 if(src.getDataDepth() != 1 || dst.getDataDepth() != 3)
+
+	 if(src.getDataDepth() != 8|| dst.getDataDepth() != 24)
 	   throw std::runtime_error("Color depth is not valid!");
       }
       else
