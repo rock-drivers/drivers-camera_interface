@@ -170,7 +170,9 @@ namespace camera
             AcqStartTriggerModeToSyncIn4,
             AcqStartTriggerModeToDisabled,
 	    GammaToOn,
-	    GammaToOff
+	    GammaToOff,
+	    GainModeToAuto,
+	    GainModeToManual
         };
     }
 
