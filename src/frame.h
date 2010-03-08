@@ -41,9 +41,9 @@ namespace camera {
         MODE_UNDEFINED = 0,
         MODE_GRAYSCALE = 1,
         MODE_RGB       = 2,
-
         RAW_MODES = 128,
-        MODE_BAYER_RGGB = RAW_MODES + 0
+        MODE_BAYER_RGGB = RAW_MODES + 0,
+	MODE_BAYER_GRBG = RAW_MODES + 0
     };
     
 #ifndef __orogen
