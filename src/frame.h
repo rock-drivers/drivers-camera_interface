@@ -10,7 +10,7 @@
 #include <iostream>
 #endif
 
-#include <base/time.h>
+#include "../../../base/base/time.h"
 
 namespace camera {
     struct frame_attrib_t
