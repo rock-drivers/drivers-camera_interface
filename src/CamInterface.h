@@ -300,6 +300,12 @@ namespace camera
         */
         bool setFrameToCameraFrameSettings(Frame &frame);
     };
+   
+    class Helper
+    {
+      static bool convertColor(const Frame &src,Frame &dest,frame_mode_t mode= MODE_UNDEFINED);
+      static bool convertGRGBToRGB(const Frame &src,Frame &dest);
+    };
 }
 #endif	/* _CAMINTERFACE_H */
 

@@ -112,4 +112,35 @@ namespace camera
         frame.init(size.width,size.height,depth,mode);
         return true;
     }
+    
+    bool Helper::convertColor(const Frame &src,Frame &dest,frame_mode_t mode)
+    {
+      if (mode == MODE_UNDEFINED)
+      {
+	mode = dest.frame_mode;
+      }
+      
+      switch(mode)
+      {
+	case MODE_BAYER_GRBG:
+	    switch (src.frame_mode)
+	    {
+	      case MODE_RGB:
+		  return convertGRGBToRGB(src,dest);
+		break;
+	      default:
+		throw std::runtime_error("Color conversion is not supported!");
+	    }  
+	  break;
+	default: 
+	    throw std::runtime_error("Color conversion is not supported!");
+      }
+      return false;
+    }
+    
+    bool Helper::convertGRGBToRGB(const Frame &src,Frame &dest)
+    {
+      return true;
+    }
+    
 }
