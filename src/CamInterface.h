@@ -303,8 +303,8 @@ namespace camera
    
     class Helper
     {
-      static bool convertColor(const Frame &src,Frame &dest,frame_mode_t mode= MODE_UNDEFINED);
-      static bool convertGRGBToRGB(const Frame &src,Frame &dest);
+      static bool convertColor(const Frame &src,Frame &dst,frame_mode_t mode= MODE_UNDEFINED);
+      static bool convertBayerToRGB24(const uint8_t *src, uint8_t *dst, int width, int height, frame_mode_t mode);
     };
 }
 #endif	/* _CAMINTERFACE_H */

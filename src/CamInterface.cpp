@@ -113,24 +113,27 @@ namespace camera
         return true;
     }
     
-    bool Helper::convertColor(const Frame &src,Frame &dest,frame_mode_t mode)
+    bool Helper::convertColor(const Frame &src,Frame &dst,frame_mode_t mode)
     {
       if (mode == MODE_UNDEFINED)
       {
-	mode = dest.frame_mode;
+	mode = dst.frame_mode;
+	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth())
+	   throw std::runtime_error("Size does not match!");
+	
+	 if(src.getDataDepth() != 1 || dst.getDataDepth() != 3)
+	   throw std::runtime_error("Color depth is not valid!");
+      }
+      else
+      {
+	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth()||dst.getDataDepth() != 3||dst.frame_mode!= MODE_RGB)
+	  dst.init(dst.getWidth(),dst.getHeight(),24,MODE_RGB);
       }
       
       switch(mode)
       {
-	case MODE_BAYER_GRBG:
-	    switch (src.frame_mode)
-	    {
-	      case MODE_RGB:
-		  return convertGRGBToRGB(src,dest);
-		break;
-	      default:
-		throw std::runtime_error("Color conversion is not supported!");
-	    }  
+	case MODE_RGB:
+	    return convertBayerToRGB24(src.getImageConstPtr(),dst.getImagePtr(),src.getWidth(),src.getHeight(),src.frame_mode);	
 	  break;
 	default: 
 	    throw std::runtime_error("Color conversion is not supported!");
@@ -138,9 +141,85 @@ namespace camera
       return false;
     }
     
-    bool Helper::convertGRGBToRGB(const Frame &src,Frame &dest)
-    {
+  bool Helper::convertBayerToRGB24(const uint8_t *src, uint8_t *dst, int width, int height, frame_mode_t mode)
+  {
+      const int srcStep = width;
+      const int dstStep = 3 * width;
+      int blue = mode == MODE_BAYER_BGGR
+		|| mode == MODE_BAYER_GBRG ? -1 : 1;
+      int start_with_green = mode == MODE_BAYER_GBRG
+			    || mode == MODE_BAYER_GRBG ;
+      int i, imax, iinc;
+
+      if (!(mode==MODE_BAYER_RGGB||mode==MODE_BAYER_GBRG||mode==MODE_BAYER_GRBG||mode==MODE_BAYER_BGGR))
+	  throw std::runtime_error("Unknown Bayer pattern");
+
+      // add a black border around the image
+      imax = width * height * 3;
+      // black border at bottom
+      for (i = width * (height - 1) * 3; i < imax; i++) 
+      	  dst[i] = 0;
+      
+      iinc = (width - 1) * 3;
+      // black border at right side
+      for (i = iinc; i < imax; i += iinc) {
+	  dst[i++] = 0;
+	  dst[i++] = 0;
+	  dst[i++] = 0;
+      }
+
+      dst ++;
+      width --;
+      height --;
+
+      for (; height--; src += srcStep, dst += dstStep) {
+	  const uint8_t *srcEnd = src + width;
+
+	  if (start_with_green) {
+	      dst[-blue] = src[1];
+	      dst[0] = (src[0] + src[srcStep + 1] + 1) >> 1;
+	      dst[blue] = src[srcStep];
+	      src++;
+	      dst += 3;
+	  }
+
+	  if (blue > 0) {
+	      for (; src <= srcEnd - 2; src += 2, dst += 6) {
+		  dst[-1] = src[0];
+		  dst[0] = (src[1] + src[srcStep] + 1) >> 1;
+		  dst[1] = src[srcStep + 1];
+
+		  dst[2] = src[2];
+		  dst[3] = (src[1] + src[srcStep + 2] + 1) >> 1;
+		  dst[4] = src[srcStep + 1];
+	      }
+	  } else {
+	      for (; src <= srcEnd - 2; src += 2, dst += 6) {
+		  dst[1] = src[0];
+		  dst[0] = (src[1] + src[srcStep] + 1) >> 1;
+		  dst[-1] = src[srcStep + 1];
+
+		  dst[4] = src[2];
+		  dst[3] = (src[1] + src[srcStep + 2] + 1) >> 1;
+		  dst[2] = src[srcStep + 1];
+	      }
+	  }
+
+	  if (src < srcEnd) {
+	      dst[-blue] = src[0];
+	      dst[0] = (src[1] + src[srcStep] + 1) >> 1;
+	      dst[blue] = src[srcStep + 1];
+	      src++;
+	      dst += 3;
+	  }
+
+	  src -= width;
+	  dst -= width * 3;
+
+	  blue = -blue;
+	  start_with_green = !start_with_green;
+      }
       return true;
-    }
+  }
     
 }
