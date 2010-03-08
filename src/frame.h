@@ -13,12 +13,6 @@
 #include <base/time.h>
 
 namespace camera {
-    enum attrib_type_t
-    {
-        GEMINI_SONAR,
-        UNKNOWN
-    };
-
     struct frame_attrib_t
     {
 #ifndef __orogen
@@ -31,7 +25,7 @@ namespace camera {
                     { return static_cast<const void*>(&data_[0]);};
 #endif
         std::vector<uint8_t> data_;
-        attrib_type_t type_;
+        std::string name_;
     };
 
     struct frame_size_t {
@@ -174,35 +168,35 @@ namespace camera {
             inline uint8_t *getImagePtr() { return static_cast<uint8_t *>(&this->image[0]); }
             inline const uint8_t *getImageConstPtr() const { return static_cast<const uint8_t *>(&this->image[0]); }
 
-	    inline bool hasAttribute(const attrib_type_t type)const
+	    inline bool hasAttribute(const std::string &name)const
             {
                 std::vector<frame_attrib_t>::const_iterator _iter = attributes.begin();
 		for(;_iter != attributes.end();_iter++)
 		{
-		  if(_iter->type_ == type)
+		  if(_iter->name_ == name)
 		    return true;
 		}
                 return false;
             }
 	    
 	    template<typename T>
-	    inline T const& getAttribute(const attrib_type_t type)const
+	    inline T const& getAttribute(const std::string &name)const
             {
                 std::vector<frame_attrib_t>::iterator _iter = attributes.begin();
 		for(;_iter != attributes.end();_iter++)
 		{
-		  if(_iter->type_ == type)
+		  if(_iter->name_ == name)
 		    return *_iter;
 		}
                 return NULL;
             }
 
-            inline bool deleteAttribute(const attrib_type_t type)
+            inline bool deleteAttribute(const std::string &name)
             {
                 std::vector<frame_attrib_t>::iterator _iter = attributes.begin();
 		for(;_iter != attributes.end();_iter++)
 		{
-		  if(_iter->type_ == type)
+		  if(_iter->name_ == name)
 		  {
 		    attributes.erase(_iter);
 		    return true;
@@ -212,16 +206,16 @@ namespace camera {
             }
 	    
 	    template<typename T>
-            inline void setAttribute(const attrib_type_t type, T const &data)
+            inline void setAttribute(const std::string &name, T const &data)
             {
 	      //if attribute exists
 	      std::vector<frame_attrib_t>::iterator _iter = attributes.begin();
 	      for(;_iter != attributes.end();_iter++)
 	      {  
-		if(_iter->type_ == type)
+		if(_iter->name_ == name)
 		{
 		  _iter->setData(data,sizeof(T));
-		  _iter->type_ = type;
+		  _iter->name_ = name;
 		  return;
 		}
 	      }
@@ -229,7 +223,7 @@ namespace camera {
 	      //if attribute does not exist
 	      attributes.push_back(frame_attrib_t());
 	      attributes.back().setData(data,size);
-	      attributes.back().type_ = type;
+	      attributes.back().name_ = name;
               return ;  
             }
 
