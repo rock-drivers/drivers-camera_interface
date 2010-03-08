@@ -121,13 +121,13 @@ namespace camera
 	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth())
 	   throw std::runtime_error("Size does not match!");
 
-	if(src.getDataDepth() != 8|| dst.getDataDepth() != 24)
+	if(src.getDataDepth() != 8|| dst.getDataDepth() != 8)
 	   throw std::runtime_error("Color depth is not valid!");
       }
       else
       {
 	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth()||dst.getDataDepth() != 3||dst.frame_mode!= MODE_RGB)
-	  dst.init(dst.getWidth(),dst.getHeight(),24,MODE_RGB);
+	  dst.init(dst.getWidth(),dst.getHeight(),8,MODE_RGB);
       }
       
       switch(mode)
@@ -140,6 +140,8 @@ namespace camera
       }
       return false;
     }
+    
+    
     
   bool Helper::convertBayerToRGB24(const uint8_t *src, uint8_t *dst, int width, int height, frame_mode_t mode)
   {
