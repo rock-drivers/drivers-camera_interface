@@ -87,6 +87,18 @@ namespace camera
              throw std::runtime_error("Can not find camera!");
         return false;
     }
+    
+    bool CamInterface::open2(unsigned long &unique_camera_id,
+					  const AccessMode mode)
+    {
+        CamInfo info;
+        info.unique_id = unique_camera_id;
+        if(findCamera(info,info))
+            return open(info,mode);
+        else
+             throw std::runtime_error("Can not find camera!");
+        return false;
+    }
 
     int CamInterface::countCameras()const
     {
@@ -129,6 +141,9 @@ namespace camera
 	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth()||dst.getDataDepth() != 3||dst.frame_mode!= MODE_RGB)
 	  dst.init(dst.getWidth(),dst.getHeight(),8,MODE_RGB);
       }
+      
+      //set frame status 
+      dst.setStatus(src.getStatus());
       
       switch(mode)
       {

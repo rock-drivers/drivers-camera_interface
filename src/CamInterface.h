@@ -11,7 +11,7 @@
 #ifndef _CAMINTERFACE_H
 #define	_CAMINTERFACE_H
 
-#include "CamTypes.h"               //definition of camera specific types
+#include "CamTypes.h"       //definition of camera specific types
 #include "frame.h"     	    //definition of a general image frame
 #include <vector>
 #include <stdexcept>
@@ -80,6 +80,14 @@ namespace camera
           \return returns true if the camera is open after the call
         */
         bool open2(const std::string &display_name,const AccessMode mode=Master);
+	
+	 //! Opens the first camera that matches the pattern
+        /*! This functions uses findCamera() and open() to open the camera.
+          \param unique_camera_id unique camera id
+          \param mode connection mode (eMaster, eMonitor)
+          \return returns true if the camera is open after the call
+        */
+        bool open2(unsigned long &unique_camera_id,const AccessMode mode=Master);
 
          //! Opens the first camera that matches the pattern
          /*! This functions uses findCamera() and open() to open the camera.

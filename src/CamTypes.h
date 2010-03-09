@@ -290,7 +290,7 @@ namespace camera
         unsigned long       permitted_access; // A combination of tPvAccessFlags
         unsigned long       interface_id;     // Unique value for each interface
                                               // or bus
-        Interface          interface_type;   // Interface type; see
+        Interface           interface_type;   // Interface type; see
                                               // tPvInterface
         std::string         display_name;     // People-friendly camera name
         bool                reachable;        // indicates if the camera is
