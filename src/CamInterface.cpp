@@ -121,7 +121,7 @@ namespace camera
         frame_mode_t mode;
         uint8_t depth;
         getFrameSettings(size,mode,depth);
-        frame.init(size.width,size.height,depth,mode);
+        frame.init(size.width,size.height,depth*8,mode);
         return true;
     }
     
@@ -131,10 +131,11 @@ namespace camera
       {
 	mode = dst.frame_mode;
 	if(src.getWidth() != dst.getWidth() || src.getWidth() != dst.getWidth())
-	   throw std::runtime_error("Size does not match!");
+	   throw std::runtime_error("Helper::convertColor: Size does not match!");
 
 	if(src.getDataDepth() != 8|| dst.getDataDepth() != 8)
-	   throw std::runtime_error("Color depth is not valid!");
+	   throw std::runtime_error("Helper::convertColor: Color depth is not valid!" 
+				    "Both frames must have a color depth of 8 bits.");
       }
       else
       {
@@ -151,7 +152,7 @@ namespace camera
 	    return convertBayerToRGB24(src.getImageConstPtr(),dst.getImagePtr(),src.getWidth(),src.getHeight(),src.frame_mode);	
 	  break;
 	default: 
-	    throw std::runtime_error("Color conversion is not supported!");
+	    throw std::runtime_error("Helper::convertColor: Color conversion is not supported!");
       }
       return false;
     }
@@ -169,7 +170,7 @@ namespace camera
       int i, imax, iinc;
 
       if (!(mode==MODE_BAYER_RGGB||mode==MODE_BAYER_GBRG||mode==MODE_BAYER_GRBG||mode==MODE_BAYER_BGGR))
-	  throw std::runtime_error("Unknown Bayer pattern");
+	  throw std::runtime_error("Helper::convertBayerToRGB24: Unknown Bayer pattern");
 
       // add a black border around the image
       imax = width * height * 3;

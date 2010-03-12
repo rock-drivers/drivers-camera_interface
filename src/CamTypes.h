@@ -352,7 +352,7 @@ namespace camera
         SingleFrame,
         MultiFrame,
         Continuously
-    } ;
+    };
 
     //
     // Camera access modes.
