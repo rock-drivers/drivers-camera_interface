@@ -175,7 +175,7 @@ namespace camera
 	    GainModeToManual
         };
     }
-
+   
     //
     // IP configuration mode for ethernet cameras.
     //
@@ -362,8 +362,9 @@ namespace camera
        Monitor,         //listen only
        Master,          //full control
        MasterMulticast  //full control + enables multicast for ethernet cameras
-    } ;
-
+    };
+ 
+ 
 }
 
 #endif	/* _CAMTYPES_H */
