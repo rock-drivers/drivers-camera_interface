@@ -85,7 +85,8 @@ namespace camera
             StatPacketsMissed,
             StatPacketsReceived,
             StatPacketsRequested,
-            StatPacketsResent
+            StatPacketsResent,
+	    IsoSpeed
         };
     }
 
