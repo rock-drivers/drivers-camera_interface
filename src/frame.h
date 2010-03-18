@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <sstream>
 #endif
 
 #include "../../../base/base/time.h"
@@ -98,7 +99,7 @@ public:
         image.resize(getPixelSize() * getPixelCount());
         reset();
 	if(hdr)
-	  setAttribute("hdr","true");
+	  setAttribute<bool>("hdr",true);
     }
 
     void reset()
@@ -234,15 +235,22 @@ public:
         }
         return false;
     }
-
-    inline std::string const &getAttribute(const std::string &name)const
+    template<typename T>
+    inline T getAttribute(const std::string &name)const
     {
-        static std::string default_value("");
+        static T default_value;
+	std::stringstream strstr;
+	
         std::vector<frame_attrib_t>::const_iterator _iter = attributes.begin();
         for (;_iter != attributes.end();_iter++)
         {
             if (_iter->name_ == name)
-                return _iter->data_;
+	    {
+                T data;
+	        strstr << _iter->data_;
+		strstr >> data;
+		return data;
+	    }
         }
         return default_value;
     }
@@ -261,21 +269,24 @@ public:
         return false;
     }
 
-    inline void setAttribute(const std::string &name, const std::string &data)
+    template<typename T>
+    inline void setAttribute(const std::string &name,const T &data)
     {
         //if attribute exists
+	std::stringstream strstr;
+	strstr << data;
         std::vector<frame_attrib_t>::iterator _iter = attributes.begin();
         for (;_iter != attributes.end();_iter++)
         {
             if (_iter->name_ == name)
             {
-                _iter->set(name,data);
+                _iter->set(name,strstr.str());
                 return;
             }
         }
         //if attribute does not exist
         attributes.push_back(frame_attrib_t());
-        attributes.back().set(name,data);
+        attributes.back().set(name,strstr.str());
         return ;
     }
 
