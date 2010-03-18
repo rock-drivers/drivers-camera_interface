@@ -307,6 +307,23 @@ namespace camera
           \return returns false if no camera is opened
         */
         bool setFrameToCameraFrameSettings(Frame &frame);
+	
+	//! Sets a callback function which is called when a new frame can be retrieved.
+        /*!
+          \param pfunction function pointer to a function which is called when a new frame can be
+			   retrieved by the function retrieveFrame(). 
+			   The callback function must follow the syntax 'static void fcn(const void* p)' 
+          \return pointer which is passed to the callback function function
+	  
+	  \attention CamInterface is not thread save. Do not call any function of it
+	             without mutex protection if you want to use an instance 
+		     in more than one thread!
+        */
+	virtual bool setCallbackFcn(void (*pcallback_function)(const void* p),void *p)
+	{
+	  throw std::runtime_error("This camerea does not support callback functions. "
+				   "Use is isFrameAvailable() instead.");
+	};
     };
    
     class Helper
