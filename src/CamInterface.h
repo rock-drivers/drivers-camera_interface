@@ -8,6 +8,30 @@
  *
  */
 
+/*! \mainpage Generic Camera Interface
+    The aim of this camera interface is to hide camera specific api calls behind
+    one general interface. The benifit is a source code that is as much as
+    possible independant from a specific camera. <br>
+    
+    This is a short example how to use the interface. 
+    \include /src/mini_example.cpp
+    
+    see \link example.cpp example.cpp \endlink for a more in depth example or see
+    CSurvey/orocos-components/orocos_camera for a orcos implementation of this interface. 
+    
+    \author Alexander Duda
+*/
+
+
+/*! \file CamInterface.h
+    \brief virtual class description of a general camera interface.
+*/
+
+/*! \example example.cpp 
+ * This is an example of how to use the camera.
+ * interface.
+ */
+
 #ifndef _CAMINTERFACE_H
 #define	_CAMINTERFACE_H
 
@@ -35,8 +59,8 @@ namespace camera
         virtual ~CamInterface();
 
     private:
-        CamInterface(const CamInterface &other){}; //only one handle for
-                                                   //one camera is allowed
+        CamInterface(const CamInterface &other){}; //only one handle per
+                                                   //camera is allowed
 
     // ------------------------------------------------------------------------
     // CONTROL FUNCTIONS-------------------------------------------------------

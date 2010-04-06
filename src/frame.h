@@ -1,3 +1,7 @@
+/*! \file frame.h
+    \brief container for imaging data 
+*/
+
 #ifndef CAMERA_FRAME_H
 #define CAMERA_FRAME_H
 
@@ -89,6 +93,11 @@ public:
     {
         setDataDepth(0);
         reset();
+    }
+    
+    Frame(uint16_t width, uint16_t height, uint8_t depth, frame_mode_t mode, bool hdr = false)
+    {
+	init(width,height,depth,mode,hdr);
     }
 
     void init(uint16_t width, uint16_t height, uint8_t depth, frame_mode_t mode, bool hdr = false)
