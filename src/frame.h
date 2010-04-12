@@ -299,7 +299,30 @@ public:
         return ;
     }
 
+//check if opencv is present
 #ifdef _CV_H_
+  #define __FRAME_OPENCV_SUPPORT__
+#endif
+ 	
+#ifdef _CV_HPP_
+  #ifndef __FRAME_OPENCV_SUPPORT__
+    #define __FRAME_OPENCV_SUPPORT__
+ #endif
+#endif 
+
+#ifdef __OPENCV_CV_H__
+  #ifndef __FRAME_OPENCV_SUPPORT__
+    #define __FRAME_OPENCV_SUPPORT__
+ #endif
+#endif 
+
+#ifdef __OPENCV_CV_HPP__
+  #ifndef __FRAME_OPENCV_SUPPORT__
+    #define __FRAME_OPENCV_SUPPORT__
+ #endif
+#endif 
+	
+#ifdef __FRAME_OPENCV_SUPPORT__
     inline cv::Mat convertToCvMat()
     {
         int itype = 0;
