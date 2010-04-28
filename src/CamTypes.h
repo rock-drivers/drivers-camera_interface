@@ -173,7 +173,10 @@ namespace camera
 	    GammaToOn,
 	    GammaToOff,
 	    GainModeToAuto,
-	    GainModeToManual
+	    GainModeToManual,
+	    WhitebalModeToManual,
+	    WhitebalModeToAuto,
+	    WhitebalModeToAutoOnce
         };
     }
    
