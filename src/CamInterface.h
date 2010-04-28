@@ -348,6 +348,16 @@ namespace camera
 	  throw std::runtime_error("This camerea does not support callback functions. "
 				   "Use is isFrameAvailable() instead.");
 	};
+	
+	//! synchronizes the camera time with the system time. Should be called only once
+        /*!
+          \param time_intervall Time interval in ms for statistical calculations. The functions blocks in the meantime
+        */
+        void synchronizeWithSystemTime(uint32_t time_interval)
+	{
+	  throw std::runtime_error("This camerea does not support synchronizeWithSystemTime. "
+				   "The timestamp of the camera frame will be invalid.");
+	};
     };
    
     class Helper
