@@ -359,6 +359,7 @@ namespace camera
 				   "The timestamp of the camera frame will be invalid.");
 	};
 	
+	//! saves the current camera configuration to the non-volatile memory inside the camera
 	//! saves the current camera configuration to the non-volatile memory insight the camera
         /*!
           \param index index of the file (allowed values 1-3) 
