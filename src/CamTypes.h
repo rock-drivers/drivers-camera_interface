@@ -177,11 +177,11 @@ namespace camera
 	    WhitebalModeToManual,
 	    WhitebalModeToAuto,
 	    WhitebalModeToAutoOnce,
-	    ConfigFileIndex1,
-	    ConfigFileIndex2,
-	    ConfigFileIndex3,
-	    ConfigFileIndex4,
-	    ConfigFileIndexFactory
+	    ConfigFileIndexTo1,
+	    ConfigFileIndexTo2,
+	    ConfigFileIndexTo3,
+	    ConfigFileIndexTo4,
+	    ConfigFileIndexToFactory
         };
     }
    
