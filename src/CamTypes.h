@@ -176,7 +176,12 @@ namespace camera
 	    GainModeToManual,
 	    WhitebalModeToManual,
 	    WhitebalModeToAuto,
-	    WhitebalModeToAutoOnce
+	    WhitebalModeToAutoOnce,
+	    ConfigFileIndex1,
+	    ConfigFileIndex2,
+	    ConfigFileIndex3,
+	    ConfigFileIndex4,
+	    ConfigFileIndexFactory
         };
     }
    

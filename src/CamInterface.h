@@ -358,6 +358,24 @@ namespace camera
 	  throw std::runtime_error("This camerea does not support synchronizeWithSystemTime. "
 				   "The timestamp of the camera frame will be invalid.");
 	};
+	
+	//! saves the current camera configuration to the non-volatile memory insight the camera
+        /*!
+          \param index index of the file (allowed values 1-3) 
+        */
+        void saveConfiguration(uint8_t index)const
+	{
+	  throw std::runtime_error("This camerea does not support saveConfiguration.");
+	};
+	
+	//! loads the camera configuration from the non-volatile memory
+        /*!  
+	  \param index index of the file (allowed values 0-3; 0 = factory defaults) 
+        */
+        void loadConfiguration(uint8_t index)
+	{
+	  throw std::runtime_error("This camerea does not support loadConfiguration.");
+	};
     };
    
     class Helper
