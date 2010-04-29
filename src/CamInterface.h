@@ -376,6 +376,28 @@ namespace camera
 	{
 	  throw std::runtime_error("This camerea does not support loadConfiguration.");
 	};
+	
+	//! returns the range of an double_attrib
+        /*!  
+	   \param attrib identifier of the attribute
+	   \param dmin Minimum value returned here
+	   \param dmax Maximum value returned here
+        */
+	virtual void getRange(const double_attrib::CamAttrib attrib,double &dmin,double &dmax)
+	{
+	  throw std::runtime_error("This camerea does not support getRange for double_attrib.");
+	};
+	
+	//! returns the range of an int_attrib
+        /*!  
+	   \param attrib identifier of the attribute
+	   \param dmin Minimum value returned here
+	   \param dmax Maximum value returned here
+        */
+	virtual void getRange(const int_attrib::CamAttrib attrib,int &imin,int &imax)
+	{
+	  throw std::runtime_error("This camerea does not support getRange for int_attrib.");
+	};
     };
    
     class Helper
