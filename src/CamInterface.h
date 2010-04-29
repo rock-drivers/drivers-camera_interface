@@ -360,7 +360,6 @@ namespace camera
 	};
 	
 	//! saves the current camera configuration to the non-volatile memory inside the camera
-	//! saves the current camera configuration to the non-volatile memory insight the camera
         /*!
           \param index index of the file (allowed values 1-3) 
         */
