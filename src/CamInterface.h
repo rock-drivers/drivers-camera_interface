@@ -353,7 +353,7 @@ namespace camera
         /*!
           \param time_intervall Time interval in ms for statistical calculations. The functions blocks in the meantime
         */
-        void synchronizeWithSystemTime(uint32_t time_interval)
+        virtual void synchronizeWithSystemTime(uint32_t time_interval)
 	{
 	  throw std::runtime_error("This camerea does not support synchronizeWithSystemTime. "
 				   "The timestamp of the camera frame will be invalid.");
@@ -363,7 +363,7 @@ namespace camera
         /*!
           \param index index of the file (allowed values 1-3) 
         */
-        void saveConfiguration(uint8_t index)const
+        virtual void saveConfiguration(uint8_t index)
 	{
 	  throw std::runtime_error("This camerea does not support saveConfiguration.");
 	};
@@ -372,7 +372,7 @@ namespace camera
         /*!  
 	  \param index index of the file (allowed values 0-3; 0 = factory defaults) 
         */
-        void loadConfiguration(uint8_t index)
+        virtual void loadConfiguration(uint8_t index)
 	{
 	  throw std::runtime_error("This camerea does not support loadConfiguration.");
 	};
