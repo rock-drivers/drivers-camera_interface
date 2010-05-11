@@ -7,15 +7,18 @@
 
 #include "CamTypes.h"
 #include <iostream>
+#include <vector>
+#include <sstream>
 
 #ifndef _CAMINFOUTILS_H
 #define	_CAMINFOUTILS_H
 
 namespace camera
 {
-    static void showCamInfo(CamInfo cam_info)
+    static std::string getCamInfo(const CamInfo &cam_info)
     {
-        std::cout << std::endl << "=== begin CamInfo ===" << std::endl
+       std::stringstream str; 
+       str  << std::endl << "=== begin CamInfo ===" << std::endl
             << "display_name: " << cam_info.display_name << std::endl
             << "interface_id: " << cam_info.interface_id << std::endl
             << "interface_type: " << enumInterfaceToStr(cam_info.interface_type) << std::endl
@@ -28,6 +31,12 @@ namespace camera
             << "serial_string: " << cam_info.serial_string << std::endl
             << "unique_id: " << cam_info.unique_id << std::endl
             << "===  end CamInfo  ===" << std::endl << std::endl;
+       return str.str();
+    }
+    
+    static void showCamInfo(const CamInfo &cam_info)
+    {
+       std::cout << getCamInfo(cam_info);
         //cam_info.
     }
 

@@ -6,15 +6,17 @@
  */
 
 #include "CamInterface.h"
+#include "CamInfoUtils.h"
 #include <iostream>
 
 //default settings for all cameras
 //use settings which most cameras supports !!!
 const int kDefaultImageWidth = 640;
 const int kDefaultImageHeight = 480;
-const camera::frame_mode_t kDefaultImageMode = camera::MODE_RGB;
+const base::samples::frame::frame_mode_t kDefaultImageMode = base::samples::frame::MODE_RGB;
 const int kDefaultColorDepth = 3;                       // in bytes per pixel
 
+using namespace base::samples::frame;
 namespace camera
 {
     CamInterface::CamInterface()
@@ -24,14 +26,14 @@ namespace camera
         image_color_depth_ = kDefaultColorDepth;
         act_grab_mode_ = Stop;
     }
-
+  
     CamInterface::~CamInterface()
     {
          
     }
 
-    bool CamInterface::setFrameSettings(  const frame_size_t size,
-                                          const frame_mode_t mode,
+    bool CamInterface::setFrameSettings(  const base::samples::frame::frame_size_t size,
+                                          const base::samples::frame::frame_mode_t mode,
                                           const uint8_t color_depth,
                                           const bool resize_frames)
     {
@@ -42,7 +44,7 @@ namespace camera
     }
 
 
-    bool CamInterface::setFrameSettings(const Frame &frame,
+    bool CamInterface::setFrameSettings(const base::samples::frame::Frame &frame,
                                         const bool resize_frames)
     {
         return setFrameSettings(frame.size,frame.frame_mode,
@@ -72,7 +74,7 @@ namespace camera
         if(findCamera(pattern,info))
             return open(info,mode);
         else
-             throw std::runtime_error("Can not find camera!");
+             throw std::runtime_error("Can not find camera: \n" + getCamInfo(pattern));
         return false;
      }
 
@@ -81,11 +83,7 @@ namespace camera
     {
         CamInfo info;
         info.display_name = display_name;
-        if(findCamera(info,info))
-            return open(info,mode);
-        else
-             throw std::runtime_error("Can not find camera!");
-        return false;
+        return open2(info,mode);
     }
     
     bool CamInterface::open2(unsigned long &unique_camera_id,
@@ -93,11 +91,7 @@ namespace camera
     {
         CamInfo info;
         info.unique_id = unique_camera_id;
-        if(findCamera(info,info))
-            return open(info,mode);
-        else
-             throw std::runtime_error("Can not find camera!");
-        return false;
+        return open2(info,mode);
     }
 
     int CamInterface::countCameras()const

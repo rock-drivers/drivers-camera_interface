@@ -35,8 +35,8 @@
 #ifndef _CAMINTERFACE_H
 #define	_CAMINTERFACE_H
 
-#include "CamTypes.h"       //definition of camera specific types
-#include "frame.h"     	    //definition of a general image frame
+#include "CamTypes.h"       		//definition of camera specific types
+#include "base/samples/frame.h"         //definition of a general image frame
 #include <vector>
 #include <stdexcept>
 
@@ -48,12 +48,12 @@ namespace camera
     class CamInterface
     {
     protected:
-        frame_size_t image_size_;  //size of the returned image frame
-        frame_mode_t image_mode_;  //color mode of the returned image frame
-                                   //See CameraFrame.h for all possible modes
-        uint8_t image_color_depth_;//color depth in bits of the returned image
-                                   //frame
-        GrabMode act_grab_mode_;  //actual grab mode
+        base::samples::frame::frame_size_t image_size_;  //size of the returned image frame
+        base::samples::frame::frame_mode_t image_mode_;  //color mode of the returned image frame
+						  //See CameraFrame.h for all possible modes
+        uint8_t image_color_depth_;		  //color depth in bits of the returned image
+						  //frame
+        GrabMode act_grab_mode_;  		  //actual grab mode
     public:
         CamInterface();
         virtual ~CamInterface();
@@ -154,7 +154,7 @@ namespace camera
             any data. Therfore any stored pointer to the vector data are no more
             valid after calling the function.
         */
-        virtual bool retrieveFrame(Frame &frame,const int timeout=1000)=0;
+        virtual bool retrieveFrame(base::samples::frame::Frame &frame,const int timeout=1000)=0;
 
          //! Checks if a frame can be retrieved from the buffer
         /*!
@@ -277,7 +277,7 @@ namespace camera
             any data. Therfore any stored pointer to the vector data are no more
             valid after calling the function.
         */
-        CamInterface& operator>>(Frame &frame);
+        CamInterface& operator>>(base::samples::frame::Frame &frame);
 
         //! Sets the frame settings size, mode and color depth.
         /*!
@@ -287,8 +287,8 @@ namespace camera
           \param resize_frames resizes all buffered frame to the right size
           \return returns true if the settings were set succsessfully
         */
-        virtual bool setFrameSettings(const frame_size_t size,
-                                      const frame_mode_t mode,
+        virtual bool setFrameSettings(const base::samples::frame::frame_size_t size,
+                                      const base::samples::frame::frame_mode_t mode,
                                       const uint8_t color_depth,
                                       const bool resize_frames = true);
 
@@ -298,7 +298,7 @@ namespace camera
           \param resize_frames resizes all buffered frame to the right size
           \return returns true if the settings were set succsessfully
         */
-        virtual bool setFrameSettings(const Frame &frame,
+        virtual bool setFrameSettings(const base::samples::frame::Frame &frame,
                                     const bool resize_frames = true);
 
         //! Gets the actual frame settings size, mode and color depth.
@@ -308,8 +308,8 @@ namespace camera
           \param color_depth number of bytes per pixel
           \return returns false if no camera is opened
         */
-        virtual bool getFrameSettings(frame_size_t &size,
-                                        frame_mode_t &mode,
+        virtual bool getFrameSettings(base::samples::frame::frame_size_t &size,
+                                        base::samples::frame::frame_mode_t &mode,
                                         uint8_t &color_depth)
         {return false;};
 
@@ -330,7 +330,7 @@ namespace camera
           \param frame frame to be configured
           \return returns false if no camera is opened
         */
-        bool setFrameToCameraFrameSettings(Frame &frame);
+        bool setFrameToCameraFrameSettings(base::samples::frame::Frame &frame);
 	
 	//! Sets a callback function which is called when a new frame can be retrieved.
         /*!
@@ -403,8 +403,10 @@ namespace camera
     class Helper
     {
       public:
-      static bool convertColor(const Frame &src,Frame &dst,frame_mode_t mode= MODE_UNDEFINED);
-      static bool convertBayerToRGB24(const uint8_t *src, uint8_t *dst, int width, int height, frame_mode_t mode);
+      static bool convertColor(const base::samples::frame::Frame &src,
+			       base::samples::frame::Frame &dst,
+			       base::samples::frame::frame_mode_t mode= base::samples::frame::MODE_UNDEFINED);
+      static bool convertBayerToRGB24(const uint8_t *src, uint8_t *dst, int width, int height, base::samples::frame::frame_mode_t mode);
     };
 }
 #endif	/* _CAMINTERFACE_H */
