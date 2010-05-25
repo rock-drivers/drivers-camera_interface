@@ -133,6 +133,7 @@ namespace camera
             ExposureModeToManual,
             ExposureModeToAuto,
             ExposureModeToAutoOnce,
+	    ExposureModeToExternal,
             MirrorXToOn,
             MirrorXToOff,
             FrameStartTriggerEventToEdgeRising,
