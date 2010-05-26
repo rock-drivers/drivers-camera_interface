@@ -119,6 +119,78 @@ namespace camera
         return true;
     }
     
+    std::string CamInterface::doDiagnose()
+    {
+      std::stringstream strstr;
+      //list all cameras
+      strstr << "Available cameras:\n";
+      std::vector<CamInfo> cam_infos;
+      listCameras(cam_infos);
+      std::vector<CamInfo>::iterator iter = cam_infos.begin();
+      for(;iter != cam_infos.end();++iter)
+      {
+	strstr << "Unique Id: " << iter->unique_id << "\n";
+	strstr << "Display Name: " << iter->display_name << "\n";
+	strstr << "Interface ID: " << iter->interface_id << "\n";
+	strstr << "Interface Type: " << iter->interface_type << "\n";
+	strstr << "Part Number: " << iter->part_number << "\n";
+	strstr << "Part Version: " << iter->part_version << "\n";
+	strstr << "Permitted Access: " << iter->permitted_access << "\n";
+	strstr << "Reachable: " << iter->reachable << "\n";
+	strstr << "Serial String: " << iter->serial_string << "\n\n";
+      }
+      
+      strstr << "\n";
+      if(!isOpen())
+      {
+	strstr << "No camera is open! Cannot do a full diagnose\n";
+	return strstr.str();
+      }
+      
+      //show CamInfo of the open camera 
+      const CamInfo *pcam_info;
+      try
+      {
+	pcam_info = getCameraInfo();
+	strstr << "Opened Camera:\n"; 
+	strstr << "Unique Id: " << pcam_info->unique_id << "\n";
+      }
+      catch(std::runtime_error e)
+      {
+	strstr << e.what() << "\n Cannot display CamInfo of the opened camera. \n";
+      }
+      
+      //test sync ports
+      strstr << "Testing syncin ports (time interval = 10 ms):\n"; 
+      if(isAttribAvail(int_attrib::SyncInLevels))
+      {
+	std::stringstream strstr_in1;
+	std::stringstream strstr_in2;
+	std::stringstream strstr_in3;
+	std::stringstream strstr_in4;
+	for(int i=0;i<100;i++)
+	{
+	  uint32_t value = getAttrib(int_attrib::SyncInLevels);
+	  strstr_in1 << (value & 1) << " ";
+	  strstr_in2 << (value & 2) << " ";
+	  strstr_in3 << (value & 4) << " ";
+	  strstr_in4 << (value & 4) << " ";
+	  usleep(10000);
+	}
+	strstr << "SyncIn1: " << strstr_in1 << "\n"; 
+	strstr << "SyncIn2: " << strstr_in2 << "\n"; 
+	strstr << "SyncIn3: " << strstr_in3 << "\n"; 
+	strstr << "SyncIn4: " << strstr_in4 << "\n\n"; 
+      }
+      else
+      {
+	 strstr << "test syncin ports is not supported by the camera.\n\n"; 
+      }
+      
+      //do some other stuff
+      return strstr.str();
+    }
+    
     bool Helper::convertColor(const Frame &src,Frame &dst,frame_mode_t mode)
     {
       if (mode == MODE_UNDEFINED)
@@ -233,5 +305,5 @@ namespace camera
       }
       return true;
   }
-    
 }
+    

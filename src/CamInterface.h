@@ -126,6 +126,16 @@ namespace camera
           \return returns true if the camera is open
         */
         virtual bool isOpen()const = 0;
+	
+	//! Returns a pointer to CamInfo of the opened camera
+        /*!
+          \return pointer to CamInfo (NULL if no camera is open)
+        */
+        virtual const CamInfo *getCameraInfo()const
+	{
+	   throw std::runtime_error("This camerea does not support getCameraInfo.");
+	   return NULL;
+	};
 
          //! Closes the camera
         /*!
@@ -235,6 +245,14 @@ namespace camera
           \return returns true if the attribute is available
         */
         virtual bool isAttribAvail(const str_attrib::CamAttrib attrib)
+                            {return false;};
+			    
+	//! Checks if a enum attribute is available
+        /*! 
+          \param attrib identifier of the attribute to be checked
+          \return returns true if the attribute is available
+        */
+        virtual bool isAttribAvail(const enum_attrib::CamAttrib attrib)
                             {return false;};
 
         //! Returns the value of an integer attribute
@@ -398,6 +416,12 @@ namespace camera
 	{
 	  throw std::runtime_error("This camerea does not support getRange for int_attrib.");
 	};
+	
+	//! does a camera diagnose
+        /*!  
+	   \returns returns a diagnose as string
+        */
+	virtual std::string doDiagnose();
     };
    
     class Helper
