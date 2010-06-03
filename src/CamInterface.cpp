@@ -171,16 +171,16 @@ namespace camera
 	for(int i=0;i<100;i++)
 	{
 	  uint32_t value = getAttrib(int_attrib::SyncInLevels);
-	  strstr_in1 << (value & 1) << " ";
-	  strstr_in2 << (value & 2) << " ";
-	  strstr_in3 << (value & 4) << " ";
-	  strstr_in4 << (value & 4) << " ";
+	  strstr_in1 << (value & 1);
+	  strstr_in2 << (value & 2);
+	  strstr_in3 << (value & 4);
+	  strstr_in4 << (value & 4);
 	  usleep(10000);
 	}
-	strstr << "SyncIn1: " << strstr_in1 << "\n"; 
-	strstr << "SyncIn2: " << strstr_in2 << "\n"; 
-	strstr << "SyncIn3: " << strstr_in3 << "\n"; 
-	strstr << "SyncIn4: " << strstr_in4 << "\n\n"; 
+	strstr << "SyncIn1: " << strstr_in1.str() << "\n"; 
+	strstr << "SyncIn2: " << strstr_in2.str() << "\n"; 
+	strstr << "SyncIn3: " << strstr_in3.str() << "\n"; 
+	strstr << "SyncIn4: " << strstr_in4.str() << "\n\n"; 
       }
       else
       {
