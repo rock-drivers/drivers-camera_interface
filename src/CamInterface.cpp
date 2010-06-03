@@ -209,8 +209,8 @@ namespace camera
 	  dst.init(dst.getWidth(),dst.getHeight(),8,MODE_RGB);
       }
       
-      //set frame status 
-      dst.setStatus(src.getStatus());
+      //set frame attributes
+      dst.copyImageIndependantAttributes(src);
       
       switch(mode)
       {
@@ -237,7 +237,7 @@ namespace camera
 
       if (!(mode==MODE_BAYER_RGGB||mode==MODE_BAYER_GBRG||mode==MODE_BAYER_GRBG||mode==MODE_BAYER_BGGR))
 	  throw std::runtime_error("Helper::convertBayerToRGB24: Unknown Bayer pattern");
-
+      
       // add a black border around the image
       imax = width * height * 3;
       // black border at bottom
