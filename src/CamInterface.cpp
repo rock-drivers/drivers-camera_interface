@@ -229,8 +229,8 @@ namespace camera
   {
       const int srcStep = width;
       const int dstStep = 3 * width;
-      int blue = mode == MODE_BAYER_BGGR
-		|| mode == MODE_BAYER_GBRG ? -1 : 1;
+      int blue = mode == MODE_BAYER_RGGB
+		|| mode == MODE_BAYER_GRBG ? -1 : 1;
       int start_with_green = mode == MODE_BAYER_GBRG
 			    || mode == MODE_BAYER_GRBG ;
       int i, imax, iinc;
