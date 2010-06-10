@@ -8,8 +8,10 @@
 #ifndef _CAMTYPES_H
 #define _CAMTYPES_H
 
+#ifndef __orogen
 #include <string>
 #include <stdexcept>
+#endif
 
 namespace camera
 {
@@ -86,7 +88,7 @@ namespace camera
             StatPacketsReceived,
             StatPacketsRequested,
             StatPacketsResent,
-	    IsoSpeed,
+	    IsoSpeed
         };
     }
 
@@ -114,10 +116,10 @@ namespace camera
             ModelName,
             SerialNumber,
             PartRevision,
-            StatFilterVersion,
+            StatFilterVersion
         };
     }
-
+   
      //enum camera attributes
     namespace enum_attrib
     {
@@ -186,6 +188,7 @@ namespace camera
         };
     }
    
+    
     //
     // IP configuration mode for ethernet cameras.
     //
@@ -194,7 +197,7 @@ namespace camera
         IpConfigUnknown      = 0,
         IpConfigPersistent   = 1,            // Use persistent IP settings
         IpConfigDhcp         = 2,            // Use DHCP, fallback to AutoIP
-        IpConfigAutoIp       = 4,            // Use AutoIP only
+        IpConfigAutoIp       = 4             // Use AutoIP only
     };
 
     struct IPSettings
@@ -216,6 +219,7 @@ namespace camera
         unsigned long       persistent_ip_subnet;
         unsigned long       persistent_ip_gateway;
 
+	#ifndef __orogen
         IPSettings()
         {
             config_mode = IpConfigUnknown;
@@ -256,6 +260,7 @@ namespace camera
                     return false;
             return true;
         };
+	#endif
     };
 
     //
@@ -269,6 +274,7 @@ namespace camera
         InterfaceUSB       
     };
 
+    #ifndef __orogen
     static inline std::string enumInterfaceToStr(Interface i)
     {
         switch(i)
@@ -287,7 +293,8 @@ namespace camera
         }
         return "";
     }
-
+    #endif
+    
     //
     // Camera information type.
     //
@@ -305,9 +312,9 @@ namespace camera
         std::string         display_name;     // People-friendly camera name
         bool                reachable;        // indicates if the camera is
                                               // reachable (same sub net)
-        IPSettings         ip_settings;      // ip settings for ethernet
+        IPSettings         ip_settings;       // ip settings for ethernet
                                               // cameras
-
+        #ifndef __orogen
         CamInfo()
         {
             unique_id = 0;
@@ -351,6 +358,7 @@ namespace camera
                 return false;
             return true;
         };
+	#endif
     };
 
     //
@@ -373,8 +381,7 @@ namespace camera
        Master,          //full control
        MasterMulticast  //full control + enables multicast for ethernet cameras
     };
- 
- 
+    
 }
 
 #endif	/* _CAMTYPES_H */
