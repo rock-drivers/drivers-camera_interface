@@ -263,6 +263,7 @@ namespace camera
 	#endif
     };
 
+    #ifndef __orogen
     //
     // Camera interface type (i.e. firewire, ethernet):
     //
@@ -274,7 +275,7 @@ namespace camera
         InterfaceUSB       
     };
 
-    #ifndef __orogen
+    
     static inline std::string enumInterfaceToStr(Interface i)
     {
         switch(i)
@@ -293,7 +294,6 @@ namespace camera
         }
         return "";
     }
-    #endif
     
     //
     // Camera information type.
@@ -314,7 +314,6 @@ namespace camera
                                               // reachable (same sub net)
         IPSettings         ip_settings;       // ip settings for ethernet
                                               // cameras
-        #ifndef __orogen
         CamInfo()
         {
             unique_id = 0;
@@ -358,9 +357,9 @@ namespace camera
                 return false;
             return true;
         };
-	#endif
+	
     };
-
+    #endif
     //
     // grab modes
     //
