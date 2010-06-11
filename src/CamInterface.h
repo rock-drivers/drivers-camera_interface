@@ -72,7 +72,8 @@ namespace camera
           \param cam_infos vector of all available cameras
           \return number of listed cameras
         */
-        virtual int listCameras(std::vector<CamInfo> &cam_infos)const = 0;
+        virtual int listCameras(std::vector<CamInfo> &cam_infos)const 
+	{throw std::runtime_error("listCameras is not yet implemented for the camera interface!");return 0;};
 
         //! Returns information about the first camera that matches the pattern
         /*!
@@ -95,7 +96,8 @@ namespace camera
           \param mode connection mode (eMaster, eMonitor)
           \return returns true if the camera is open after the call
         */
-        virtual bool open(const CamInfo &cam,const AccessMode mode=Master)=0;
+        virtual bool open(const CamInfo &cam,const AccessMode mode=Master)
+        {throw std::runtime_error("open is not yet implemented for the camera interface!");return 0;};
 
         //! Opens the first camera that matches the pattern
         /*! This functions uses findCamera() and open() to open the camera.
@@ -103,7 +105,7 @@ namespace camera
           \param mode connection mode (eMaster, eMonitor)
           \return returns true if the camera is open after the call
         */
-        bool open2(const std::string &display_name,const AccessMode mode=Master);
+        virtual bool open2(const std::string &display_name,const AccessMode mode=Master);
 	
 	 //! Opens the first camera that matches the pattern
         /*! This functions uses findCamera() and open() to open the camera.
@@ -111,7 +113,7 @@ namespace camera
           \param mode connection mode (eMaster, eMonitor)
           \return returns true if the camera is open after the call
         */
-        bool open2(unsigned long &unique_camera_id,const AccessMode mode=Master);
+        virtual bool open2(unsigned long &unique_camera_id,const AccessMode mode=Master);
 
          //! Opens the first camera that matches the pattern
          /*! This functions uses findCamera() and open() to open the camera.
@@ -119,13 +121,14 @@ namespace camera
           \param mode connection mode (eMaster, eMonitor)
           \return returns true if the camera is open after the call
         */
-        bool open2(const CamInfo &pattern,const AccessMode mode=Master);
+        virtual bool open2(const CamInfo &pattern,const AccessMode mode=Master);
         
         //! Checks if the camera is open
         /*!
           \return returns true if the camera is open
         */
-        virtual bool isOpen()const = 0;
+        virtual bool isOpen()const
+	{throw std::runtime_error("isOpen is not yet implemented for the camera interface!");return 0;};
 	
 	//! Returns a pointer to CamInfo of the opened camera
         /*!
@@ -133,7 +136,7 @@ namespace camera
         */
         virtual const CamInfo *getCameraInfo()const
 	{
-	   throw std::runtime_error("This camerea does not support getCameraInfo.");
+	   throw std::runtime_error("This camerea interface does not support getCameraInfo.");
 	   return NULL;
 	};
 
@@ -141,7 +144,8 @@ namespace camera
         /*!
           \return returns true if no camera is open or the camera was closed
         */
-        virtual bool close()=0;
+        virtual bool close()
+	{throw std::runtime_error("close is not yet implemented for the camera interface!");return 0;};
 
         //! Starts capturing into a buffer
         /*!
@@ -150,7 +154,8 @@ namespace camera
           \return returns true if capturing was started
         */
         virtual bool grab(const GrabMode mode = SingleFrame,
-                          const int buffer_len=1)=0;
+                          const int buffer_len=1)
+        {throw std::runtime_error("grab is not yet implemented for the camera interface!");return 0;};                  
 
         //! Retrieves the next frame from the buffer (no data are copied).
         /*! This function is synchron and blocks until a frame can be retrieved
@@ -164,19 +169,22 @@ namespace camera
             any data. Therfore any stored pointer to the vector data are no more
             valid after calling the function.
         */
-        virtual bool retrieveFrame(base::samples::frame::Frame &frame,const int timeout=1000)=0;
+        virtual bool retrieveFrame(base::samples::frame::Frame &frame,const int timeout=1000)
+	{throw std::runtime_error("retrieveFrame is not yet implemented for the camera interface!");return 0;};
 
          //! Checks if a frame can be retrieved from the buffer
         /*!
           \return returns true if a frame can be retrieved without blocking
         */
-        virtual bool isFrameAvailable()=0;
+        virtual bool isFrameAvailable()
+	{throw std::runtime_error("isFrameAvailable is not yet implemented for the camera interface!");return 0;};
 
          //! Skips all buffered frame beside the last one.
         /*!
           \return returns the number of skipped frames
         */
-        virtual int skipFrames(){return 0;};
+        virtual int skipFrames()
+        {throw std::runtime_error("skipFrames is not yet implemented for the camera interface!");return 0;};
 
          //! Sets the IP adress and subnetmask of a ethernet camera
         /*!
@@ -185,7 +193,8 @@ namespace camera
           \return returns true if the change was succesfull
         */
         virtual bool setIpSettings(const CamInfo &cam,
-                    const IPSettings &ip_settings)const{return false;};
+                    const IPSettings &ip_settings)const
+        {throw std::runtime_error("setIpSettings is not yet implemented for the camera interface!");return 0;};
 
          //! Sets the value of an integer attribute.
         /*!
@@ -194,7 +203,7 @@ namespace camera
           \return returns true if the change was succesfull
         */
         virtual bool setAttrib(const int_attrib::CamAttrib attrib,const int value)
-                        {return false;};
+        {throw std::runtime_error("setAttrib int_attrib is not yet implemented for the camera interface!");return 0;};
 
           //! Sets the value of a double attribute.
         /*!
@@ -203,7 +212,8 @@ namespace camera
           \return returns true if the change was succesfull
         */
         virtual bool setAttrib(const double_attrib::CamAttrib attrib,
-                                const double value){return false;};
+                                const double value)
+        {throw std::runtime_error("setAttrib double_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Sets the value of a string attribute.
         /*!
@@ -211,8 +221,8 @@ namespace camera
           \param value new string value.
           \return returns true if the change was succesfull
         */
-        virtual bool setAttrib(const str_attrib::CamAttrib attrib,
-                        const std::string &value){return false;};
+        virtual bool setAttrib(const str_attrib::CamAttrib attrib,const std::string value)
+        {throw std::runtime_error("setAttrib str_attrib is not yet implemented for the camera interface!");return 0;};
 
          //! Sets the value of an enum attribute.
         /*!
@@ -221,7 +231,7 @@ namespace camera
           \return returns true if the change was succesfull
         */
         virtual bool setAttrib(const enum_attrib::CamAttrib attrib)
-                                        {return false;};
+        {throw std::runtime_error("setAttrib enum_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Checks if an integer attribute is available
         /*!
@@ -229,7 +239,7 @@ namespace camera
           \return returns true if the attribute is available
         */
         virtual bool isAttribAvail(const int_attrib::CamAttrib attrib)
-                            {return false;};
+        {throw std::runtime_error("isAttribAvail int_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Checks if a double attribute is available
         /*!
@@ -237,7 +247,7 @@ namespace camera
           \return returns true if the attribute is available
         */
         virtual bool isAttribAvail(const double_attrib::CamAttrib attrib)
-                    {return false;};
+        {throw std::runtime_error("isAttribAvail double_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Checks if a string attribute is available
         /*!
@@ -245,7 +255,7 @@ namespace camera
           \return returns true if the attribute is available
         */
         virtual bool isAttribAvail(const str_attrib::CamAttrib attrib)
-                            {return false;};
+        {throw std::runtime_error("isAttribAvail str_attrib is not yet implemented for the camera interface!");return 0;};
 			    
 	//! Checks if a enum attribute is available
         /*! 
@@ -253,21 +263,23 @@ namespace camera
           \return returns true if the attribute is available
         */
         virtual bool isAttribAvail(const enum_attrib::CamAttrib attrib)
-                            {return false;};
+        {throw std::runtime_error("isAttribAvail enum_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Returns the value of an integer attribute
         /*!
           \param attrib identifier of the attribute
           \return attribute value
         */
-        virtual int getAttrib(const int_attrib::CamAttrib attrib){return 0;};
+        virtual int getAttrib(const int_attrib::CamAttrib attrib)
+        {throw std::runtime_error("getAttrib int_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Returns the value of a double attribute
         /*!
           \param attrib identifier of the attribute
           \return attribute value
         */
-        virtual double getAttrib(const double_attrib::CamAttrib attrib){return 0;};
+        virtual double getAttrib(const double_attrib::CamAttrib attrib)
+        {throw std::runtime_error("getAttrib double_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Returns the value of a string attribute
         /*!
@@ -275,7 +287,7 @@ namespace camera
           \return attribute value
         */
         virtual std::string getAttrib(const str_attrib::CamAttrib attrib)
-                        {return "";};
+        {throw std::runtime_error("getAttrib str_attrib is not yet implemented for the camera interface!");return 0;};
 
         //! Checks if the enum attribute is set
         /*!
@@ -283,7 +295,7 @@ namespace camera
           \return returns true if the enum attribute is set
         */
         virtual bool isAttribSet(const enum_attrib::CamAttrib attrib)
-                        {return false;};
+        {throw std::runtime_error("isAttribSet is not yet implemented for the camera interface!");return 0;};
 
         //! Retrieves a camera frame (no data are copied)
         /*! If grab is called in advance the operator is equal to the function
@@ -295,7 +307,7 @@ namespace camera
             any data. Therfore any stored pointer to the vector data are no more
             valid after calling the function.
         */
-        CamInterface& operator>>(base::samples::frame::Frame &frame);
+        virtual CamInterface& operator>>(base::samples::frame::Frame &frame);
 
         //! Sets the frame settings size, mode and color depth.
         /*!
@@ -329,26 +341,28 @@ namespace camera
         virtual bool getFrameSettings(base::samples::frame::frame_size_t &size,
                                         base::samples::frame::frame_mode_t &mode,
                                         uint8_t &color_depth)
-        {return false;};
+        {throw std::runtime_error("getFrameSettings is not yet implemented for the camera interface!");return 0;};
 
         //! Triggers a new frame if FrameStartTriggerMode is set to Software.
         /*!
           \return returns false if no camera is opened
         */
-        virtual bool triggerFrame(){return false;};
+        virtual bool triggerFrame()
+        {throw std::runtime_error("triggerFrame is not yet implemented for the camera interface!");return 0;};
 
         //! Sets the camera to default settings.
         /*!
           \return returns false if no camera is opened
         */
-        virtual bool setToDefault(){return false;};
+        virtual bool setToDefault()
+        {throw std::runtime_error("setToDefault is not yet implemented for the camera interface!");return 0;};
 
         //! Configures the frame that it matches the camera frame settings.
         /*!
           \param frame frame to be configured
           \return returns false if no camera is opened
         */
-        bool setFrameToCameraFrameSettings(base::samples::frame::Frame &frame);
+        virtual bool setFrameToCameraFrameSettings(base::samples::frame::Frame &frame);
 	
 	//! Sets a callback function which is called when a new frame can be retrieved.
         /*!
