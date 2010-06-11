@@ -357,9 +357,9 @@ namespace camera
                 return false;
             return true;
         };
-	
     };
     #endif
+    
     //
     // grab modes
     //
