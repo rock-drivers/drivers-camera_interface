@@ -212,7 +212,7 @@ namespace camera
             SyncOut1InvertToOn,
             SyncOut1InvertToOff,
             SyncOut2InvertToOn,
-            SyncOut2InvertToOff,
+            SyncOut2InvertToOff
         };
     }
    
