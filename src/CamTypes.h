@@ -295,7 +295,7 @@ namespace camera
     //
     // Camera interface type (i.e. firewire, ethernet):
     //
-    enum Interface
+    enum InterfaceType
     {
         InterfaceUnknown,
         InterfaceFirewire,
@@ -304,7 +304,7 @@ namespace camera
     };
 
     
-    static inline std::string enumInterfaceToStr(Interface i)
+    static inline std::string enumInterfaceToStr(InterfaceType i)
     {
         switch(i)
         {
@@ -335,7 +335,7 @@ namespace camera
         unsigned long       permitted_access; // A combination of tPvAccessFlags
         unsigned long       interface_id;     // Unique value for each interface
                                               // or bus
-        Interface           interface_type;   // Interface type; see
+        InterfaceType       interface_type;   // Interface type; see
                                               // tPvInterface
         std::string         display_name;     // People-friendly camera name
         bool                reachable;        // indicates if the camera is
