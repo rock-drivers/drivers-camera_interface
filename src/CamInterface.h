@@ -162,7 +162,7 @@ namespace camera
             from the buffer or a timeout occurs. To check if a frame can be
             retrievt call isFrameAvailable().
           \param frame structure where the frame is stored.
-          \param buffer_len length of the buffer in frames.
+          \param timeout timeout waiting for a frame, in milliseconds
           \return returns true if a frame was retrieved
           \attention The frame must have the same size like the returned frame
             because the function swaps the image vector and does not copy
