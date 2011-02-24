@@ -335,6 +335,7 @@ namespace camera
         unsigned long       permitted_access; // A combination of tPvAccessFlags
         unsigned long       interface_id;     // Unique value for each interface
                                               // or bus
+        std::string         device;           // Camera device on OS (for USB)
         InterfaceType       interface_type;   // Interface type; see
                                               // tPvInterface
         std::string         display_name;     // People-friendly camera name
@@ -375,6 +376,9 @@ namespace camera
                     return false;
             if (serial_string.size() != 0 && other.serial_string.size() != 0 &&
                     serial_string != other.serial_string)
+                    return false;
+            if (device.size() != 0 && other.device.size() != 0 &&
+                    device != other.device)
                     return false;
             if (display_name.size() != 0 && other.display_name.size() != 0 &&
                     display_name != other.display_name)
