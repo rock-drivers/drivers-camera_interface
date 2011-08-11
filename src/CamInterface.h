@@ -37,6 +37,7 @@
 
 #include "CamTypes.h"       		//definition of camera specific types
 #include <base/samples/frame.h>         //definition of a general image frame
+#include <base/samples/compressed_frame.h> 
 #include <vector>
 #include <stdexcept>
 
@@ -170,6 +171,8 @@ namespace camera
             valid after calling the function.
         */
         virtual bool retrieveFrame(base::samples::frame::Frame &frame,const int timeout=1000)
+	{throw std::runtime_error("retrieveFrame is not yet implemented for the camera interface!");return 0;};
+        virtual bool retrieveFrame(base::samples::frame::CompressedFrame &frame,const int timeout=1000)
 	{throw std::runtime_error("retrieveFrame is not yet implemented for the camera interface!");return 0;};
 
          //! Checks if a frame can be retrieved from the buffer
