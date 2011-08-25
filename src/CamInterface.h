@@ -433,6 +433,15 @@ namespace camera
 	{
 	  throw std::runtime_error("This camerea does not support getRange for int_attrib.");
 	};
+    
+    //! returns the file descriptor of the camera
+        /*!  
+       \returns returns a file descriptor
+        */
+    virtual int getFileDescriptor() const
+    {
+      throw std::runtime_error("This camerea does not provide a file descriptor.");
+    };
 	
 	//! does a camera diagnose
         /*!  
