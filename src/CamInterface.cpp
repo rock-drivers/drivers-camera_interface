@@ -14,7 +14,7 @@
 const int kDefaultImageWidth = 640;
 const int kDefaultImageHeight = 480;
 const base::samples::frame::frame_mode_t kDefaultImageMode = base::samples::frame::MODE_RGB;
-const int kDefaultColorDepth = 8;                       // in bits per pixel
+const int kDefaultColorDepth = 3;                       // in bytes per pixel
 
 using namespace base::samples::frame;
 namespace camera
@@ -48,7 +48,7 @@ namespace camera
                                         const bool resize_frames)
     {
         return setFrameSettings(frame.size,frame.frame_mode,
-                                frame.getDataDepth(),resize_frames);
+                                frame.getPixelSize(),resize_frames);
     }
 
     bool CamInterface::findCamera
