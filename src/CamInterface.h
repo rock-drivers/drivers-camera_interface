@@ -52,7 +52,7 @@ namespace camera
         base::samples::frame::frame_size_t image_size_;  //size of the returned image frame
         base::samples::frame::frame_mode_t image_mode_;  //color mode of the returned image frame
 						  //See CameraFrame.h for all possible modes
-        uint8_t image_color_depth_;		  //color depth in bits of the returned image
+        uint8_t image_color_depth_;		  //color depth in bytes of the returned image
 						  //frame
         GrabMode act_grab_mode_;  		  //actual grab mode
     public:
