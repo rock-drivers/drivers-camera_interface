@@ -42,19 +42,6 @@ namespace camera
         image_color_depth_ = color_depth;
         return true;
     }
-    
-    bool CamInterface::setFrameSettings(  const base::samples::frame::frame_size_t size,
-                                          const base::samples::frame::frame_compressed_mode_t mode,
-                                          const uint8_t color_depth,
-                                          const bool resize_frames)
-    {
-        image_size_ = size;
-        image_mode_ = MODE_COMPRESSED;
-        compressed_image_mode_ = mode;
-        image_color_depth_ = color_depth;
-        return true;
-    }
-
 
     bool CamInterface::setFrameSettings(const base::samples::frame::Frame &frame,
                                         const bool resize_frames)

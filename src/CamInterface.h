@@ -51,7 +51,6 @@ namespace camera
     protected:
         base::samples::frame::frame_size_t image_size_;  //size of the returned image frame
         base::samples::frame::frame_mode_t image_mode_;  //color mode of the returned image frame
-        base::samples::frame::frame_compressed_mode_t compressed_image_mode_;  //color mode of the returned image frame
 						  //See CameraFrame.h for all possible modes
         uint8_t image_color_depth_;		  //color depth in bytes of the returned image
 						  //frame
@@ -326,10 +325,6 @@ namespace camera
                                       const uint8_t color_depth,
                                       const bool resize_frames = true);
     
-        virtual bool setFrameSettings(  const base::samples::frame::frame_size_t size,
-                                          const base::samples::frame::frame_compressed_mode_t mode,
-                                          const uint8_t color_depth,
-                                          const bool resize_frames=true);
 
          //! Sets the camera frame settings to the values of the frame.
         /*!
