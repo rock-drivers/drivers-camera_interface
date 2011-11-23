@@ -89,7 +89,13 @@ namespace camera
             StatPacketsRequested,
             StatPacketsResent,
             IsoSpeed,
-            HDRValue
+            HDRValue,
+            BrightnessValue,
+            ContrastValue,
+            SaturationValue,
+            WhitebalValue,
+            SharpnessValue,
+            BacklightCompensation
         };
     }
 
@@ -213,7 +219,10 @@ namespace camera
             SyncOut1InvertToOn,
             SyncOut1InvertToOff,
             SyncOut2InvertToOn,
-            SyncOut2InvertToOff
+            SyncOut2InvertToOff,
+        PowerLineFrequencyDisabled,
+        PowerLineFrequencyTo50,
+        PowerLineFrequencyTo60
         };
     }
    
