@@ -109,12 +109,12 @@ namespace camera
     bool CamInterface::setFrameToCameraFrameSettings(Frame &frame)
     {
         if(!isOpen())
-          throw std::runtime_error("No Camer is open!");
+          throw std::runtime_error("No Camera is open!");
         frame_size_t size;
         frame_mode_t mode;
-        uint8_t depth;
-        getFrameSettings(size,mode,depth);
-        frame.init(size.width,size.height,depth*8,mode);
+        uint8_t pixel_size_in_bytes;
+        getFrameSettings(size,mode,pixel_size_in_bytes);
+        frame.init(size.width,size.height,pixel_size_in_bytes*8/Frame::getChannelCount(mode),mode);
         return true;
     }
     
