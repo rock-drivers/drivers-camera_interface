@@ -95,7 +95,8 @@ namespace camera
             SaturationValue,
             WhitebalValue,
             SharpnessValue,
-            BacklightCompensation
+            BacklightCompensation,
+            PixelClock
         };
     }
 
