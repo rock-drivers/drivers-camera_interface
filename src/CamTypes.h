@@ -223,7 +223,9 @@ namespace camera
             SyncOut2InvertToOff,
         PowerLineFrequencyDisabled,
         PowerLineFrequencyTo50,
-        PowerLineFrequencyTo60
+        PowerLineFrequencyTo60,
+            MirrorYToOn,
+            MirrorYToOff,
         };
     }
    
