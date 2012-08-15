@@ -8,6 +8,7 @@
 #include "CamInterface.h"
 #include "CamInfoUtils.h"
 #include <iostream>
+#include <unistd.h>
 
 //default settings for all cameras
 //use settings which most cameras supports !!!
