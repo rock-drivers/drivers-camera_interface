@@ -226,6 +226,8 @@ namespace camera
         PowerLineFrequencyTo60,
             MirrorYToOn,
             MirrorYToOff,
+            ExposureAutoAlgToMean,
+            ExposureAutoAlgToFitRange
         };
     }
    
