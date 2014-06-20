@@ -55,6 +55,10 @@ pkg_check_modules(BASE "base-types" )
 include_directories(${BASE_INCLUDE_DIRS})
 link_directories(${BASE_LIBDIR})
 
+pkg_check_modules(CV "opencv" )
+include_directories(${CV_INCLUDE_DIRS})
+link_directories(${CV_LIBRARY_DIR})
+
 ##### End specification of build directory ##############################
 
 
