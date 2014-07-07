@@ -11,7 +11,6 @@ int ExposureController::calcNewValue(int measuredValue, int target) {
 	}
 	if(abs(measuredValue - target) > tolerance) { 
 		double mx = lastExp * 1.0 / measuredValue;
-		cout << "MX:" << mx << endl;
 		return mx * target;
 	} else {
 		return lastExp;
