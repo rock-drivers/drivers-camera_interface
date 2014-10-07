@@ -6,6 +6,6 @@ includedir=${prefix}/include
 Name: @PROJECT_NAME@
 Description: @PROJECT_DESCRIPTION@
 Version: @PROJECT_VERSION@
-Requires: base-types
+Requires: base-types opencv
 Libs: -L${libdir} -l@PROJECT_NAME@
 Cflags: -I${includedir}
