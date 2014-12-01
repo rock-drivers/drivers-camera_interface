@@ -21,7 +21,7 @@ class WeightedRect {
 class AbstractBrightnessIndicator {
 	public:
 		/* Returns a number indicating how bright the image is in the range from 0 - 255 */
-		virtual int getBrightness(cv::Mat frame) = 0;
+		virtual int getBrightness(const cv::Mat &frame) = 0;
 };
 
 /*
@@ -29,7 +29,7 @@ class AbstractBrightnessIndicator {
  */
 class SimpleBrightnessIndicator : AbstractBrightnessIndicator {
 	public: 
-		virtual int getBrightness(cv::Mat frame);
+		virtual int getBrightness(const cv::Mat &frame);
 };
 
 /*
@@ -43,7 +43,7 @@ class WeightedBoxesBrightnessIndicator : AbstractBrightnessIndicator {
 	public:
 		WeightedBoxesBrightnessIndicator(std::vector<WeightedRect> _weightedRegions) : weightedRegions(_weightedRegions) {}; 
 		void setWeightedRegions(std::vector<WeightedRect> _weightedRegions);
-		virtual int getBrightness(cv::Mat frame);
+		virtual int getBrightness(const cv::Mat &frame);
 
 		const static std::vector<WeightedRect> REGION_SPOT;
 		const static std::vector<WeightedRect> REGION_BOTTOM_DOUBLE;

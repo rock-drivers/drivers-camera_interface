@@ -11,7 +11,7 @@ static vector<WeightedRect> createRegionSpot() {
 
 const vector<WeightedRect> WeightedBoxesBrightnessIndicator::REGION_SPOT(createRegionSpot());
 
-static int calcBrightOfMat(Mat image) {
+static int calcBrightOfMat(const Mat &image) {
 	cv::Scalar s = cv::mean(image);
 	int sum = 0;
 	for(int channel=0;channel < image.channels();++channel) {
@@ -37,11 +37,11 @@ WeightedRect::WeightedRect(float _x1, float _y1, float _x2, float _y2, int _weig
 	}
 }
 
-int SimpleBrightnessIndicator::getBrightness(Mat image) {
+int SimpleBrightnessIndicator::getBrightness(const Mat &image) {
 	return calcBrightOfMat(image);
 }
 
-int WeightedBoxesBrightnessIndicator::getBrightness(Mat image) {
+int WeightedBoxesBrightnessIndicator::getBrightness(const Mat &image) {
 	int weightedSum = 0;
 	int sumOfWeights = 0;
 	double x_center = image.cols * 1.0 / 2;
