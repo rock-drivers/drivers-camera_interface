@@ -184,6 +184,7 @@ namespace camera
 	    GammaToOn,
 	    GammaToOff,
 	    GainModeToAuto,
+        GainModeToAutoOnce,
 	    GainModeToManual,
 	    WhitebalModeToManual,
 	    WhitebalModeToAuto,
