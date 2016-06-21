@@ -36,7 +36,7 @@
 #define	_CAMINTERFACE_H
 
 #include "CamTypes.h"       		//definition of camera specific types
-#include <base/samples/frame.h>         //definition of a general image frame
+#include <base/samples/Frame.hpp>         //definition of a general image frame
 #include <vector>
 #include <stdexcept>
 
