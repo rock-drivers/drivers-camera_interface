@@ -3,7 +3,7 @@
 
 #include <cv.h>
 #include <vector>
-#include "base/samples/frame.h"
+#include <base/samples/Frame.hpp>
 
 
 class WeightedRect {
