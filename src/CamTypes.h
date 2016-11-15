@@ -89,6 +89,7 @@ namespace camera
             StatPacketsRequested,
             StatPacketsResent,
             IsoSpeed,
+            OperationMode,
             HDRValue,
             BrightnessValue,
             ContrastValue,
