@@ -22,6 +22,7 @@ class AbstractBrightnessIndicator {
 	public:
 		/* Returns a number indicating how bright the image is in the range from 0 - 255 */
 		virtual int getBrightness(const cv::Mat &frame) = 0;
+		virtual ~AbstractBrightnessIndicator() {}
 };
 
 /*

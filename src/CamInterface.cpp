@@ -57,7 +57,7 @@ namespace camera
         std::vector<CamInfo> list;
         listCameras(list);
 
-        for(int i=0; i< list.size();++i)
+        for(size_t i=0; i< list.size();++i)
         {
             if (list[i].matches(pattern))
             {
@@ -105,6 +105,7 @@ namespace camera
         if(act_grab_mode_ == Stop)
             grab(SingleFrame,1);
         retrieveFrame(frame);
+        return *this;
     }
 
     bool CamInterface::setFrameToCameraFrameSettings(Frame &frame)

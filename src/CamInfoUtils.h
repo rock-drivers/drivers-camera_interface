@@ -16,7 +16,7 @@
 
 namespace camera
 {
-    static std::string getCamInfo(const CamInfo &cam_info)
+    inline std::string getCamInfo(const CamInfo &cam_info)
     {
        std::stringstream str; 
        struct in_addr ip_address, ip_subnet, ip_gateway;
@@ -45,13 +45,13 @@ namespace camera
        return str.str();
     }
     
-    static void showCamInfo(const CamInfo &cam_info)
+    inline void showCamInfo(const CamInfo &cam_info)
     {
        std::cout << getCamInfo(cam_info);
         //cam_info.
     }
 
-    static void showCamInfos(std::vector<CamInfo> &cam_infos)
+    inline void showCamInfos(std::vector<CamInfo> &cam_infos)
     {
         int inum = cam_infos.size();
         std::cout << "Found " << inum<< " cameras:\n";
