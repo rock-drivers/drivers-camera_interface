@@ -1,8 +1,12 @@
 # CMakeLists.txt has to be located in the project folder and cmake has to be
 # executed from 'project/build' with 'cmake ../'.
-cmake_minimum_required(VERSION 2.7)
+
+cmake_minimum_required(VERSION 3.9)
+project(camera_interface
+        VERSION 1.0
+        DESCRIPTION "Base interface for other camera drivers in Rock")
 find_package(Rock)
-rock_init(camera_interface 1.0)
+rock_init()
 
 option(OPENCV4 "Whether OpenCV 4 or later should be used" OFF)
 if (OPENCV4)
