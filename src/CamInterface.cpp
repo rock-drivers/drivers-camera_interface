@@ -1,7 +1,7 @@
-/* 
+/*
  * File:   CamInterface.cpp
  * Author: developer
- * 
+ *
  * Created on February 9, 2010, 8:27 AM
  */
 
@@ -27,10 +27,10 @@ namespace camera
         image_color_depth_ = kDefaultColorDepth;
         act_grab_mode_ = Stop;
     }
-  
+
     CamInterface::~CamInterface()
     {
-         
+
     }
 
     bool CamInterface::setFrameSettings(  const base::samples::frame::frame_size_t size,
@@ -85,7 +85,7 @@ namespace camera
         info.display_name = display_name;
         return open2(info,mode);
     }
-    
+
     bool CamInterface::open2(unsigned long &unique_camera_id,
 					  const AccessMode mode)
     {
@@ -119,7 +119,7 @@ namespace camera
         frame.init(size.width,size.height,pixel_size_in_bytes*8/Frame::getChannelCount(mode),mode);
         return true;
     }
-    
+
     std::string CamInterface::doDiagnose()
     {
       std::stringstream strstr;
@@ -140,29 +140,29 @@ namespace camera
 	strstr << "Reachable: " << iter->reachable << "\n";
 	strstr << "Serial String: " << iter->serial_string << "\n\n";
       }
-      
+
       strstr << "\n";
       if(!isOpen())
       {
 	strstr << "No camera is open! Cannot do a full diagnose\n";
 	return strstr.str();
       }
-      
-      //show CamInfo of the open camera 
+
+      //show CamInfo of the open camera
       const CamInfo *pcam_info;
       try
       {
 	pcam_info = getCameraInfo();
-	strstr << "Opened Camera:\n"; 
+	strstr << "Opened Camera:\n";
 	strstr << "Unique Id: " << pcam_info->unique_id << "\n";
       }
-      catch(std::runtime_error e)
+      catch(std::runtime_error const& e)
       {
 	strstr << e.what() << "\n Cannot display CamInfo of the opened camera. \n";
       }
-      
+
       //test sync ports
-      strstr << "Testing syncin ports (time interval = 10 ms):\n"; 
+      strstr << "Testing syncin ports (time interval = 10 ms):\n";
       if(isAttribAvail(int_attrib::SyncInLevels))
       {
 	std::stringstream strstr_in1;
@@ -178,18 +178,18 @@ namespace camera
 	  strstr_in4 << (value & 4);
 	  usleep(10000);
 	}
-	strstr << "SyncIn1: " << strstr_in1.str() << "\n"; 
-	strstr << "SyncIn2: " << strstr_in2.str() << "\n"; 
-	strstr << "SyncIn3: " << strstr_in3.str() << "\n"; 
-	strstr << "SyncIn4: " << strstr_in4.str() << "\n\n"; 
+	strstr << "SyncIn1: " << strstr_in1.str() << "\n";
+	strstr << "SyncIn2: " << strstr_in2.str() << "\n";
+	strstr << "SyncIn3: " << strstr_in3.str() << "\n";
+	strstr << "SyncIn4: " << strstr_in4.str() << "\n\n";
       }
       else
       {
-	 strstr << "test syncin ports is not supported by the camera.\n\n"; 
+	 strstr << "test syncin ports is not supported by the camera.\n\n";
       }
-      
+
       //do some other stuff
       return strstr.str();
     }
 }
-    
+
