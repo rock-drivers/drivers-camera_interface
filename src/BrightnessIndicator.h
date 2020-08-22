@@ -1,7 +1,7 @@
 #ifndef BRIGHTNESSINDICATOR_H
 #define BRIGHTNESSINDICATOR_H
 
-#include <cv.h>
+#include <opencv2/opencv.hpp>
 #include <vector>
 #include <base/samples/Frame.hpp>
 
